@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/driver.out.dir/Indexer.cpp.o CMakeFiles/driver.out.dir/Driver.cpp.o CMakeFiles/driver.out.dir/Word.cpp.o  -o driver.out -rdynamic 
