@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = /home/eliot2/School/CMSC/341/proj2/src
 CMAKE_BINARY_DIR = /home/eliot2/School/CMSC/341/proj2/build-src
 
 #=============================================================================
-# Target rules for target CMakeFiles/driver.out.dir
+# Target rules for target CMakeFiles/Driver.out.dir
 
 # All Build rule for target.
-CMakeFiles/driver.out.dir/all:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/depend
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/build
+CMakeFiles/Driver.out.dir/all:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/depend
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/eliot2/School/CMSC/341/proj2/build-src/CMakeFiles  1 2 3
-	@echo "Built target driver.out"
-.PHONY : CMakeFiles/driver.out.dir/all
+	@echo "Built target Driver.out"
+.PHONY : CMakeFiles/Driver.out.dir/all
 
 # Include target in all.
-all: CMakeFiles/driver.out.dir/all
+all: CMakeFiles/Driver.out.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/driver.out.dir/rule: cmake_check_build_system
+CMakeFiles/Driver.out.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eliot2/School/CMSC/341/proj2/build-src/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/driver.out.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Driver.out.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eliot2/School/CMSC/341/proj2/build-src/CMakeFiles 0
-.PHONY : CMakeFiles/driver.out.dir/rule
+.PHONY : CMakeFiles/Driver.out.dir/rule
 
 # Convenience name for target.
-driver.out: CMakeFiles/driver.out.dir/rule
-.PHONY : driver.out
+Driver.out: CMakeFiles/Driver.out.dir/rule
+.PHONY : Driver.out
 
 # clean rule for target.
-CMakeFiles/driver.out.dir/clean:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/clean
-.PHONY : CMakeFiles/driver.out.dir/clean
+CMakeFiles/Driver.out.dir/clean:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/clean
+.PHONY : CMakeFiles/Driver.out.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/driver.out.dir/clean
+clean: CMakeFiles/Driver.out.dir/clean
 .PHONY : clean
 
 #=============================================================================

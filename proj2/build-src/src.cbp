@@ -17,8 +17,8 @@
             <DistClean command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
-      <Target title="driver.out">
-         <Option output="/home/eliot2/School/CMSC/341/proj2/build-src/driver.out" prefix_auto="0" extension_auto="0" />
+      <Target title="Driver.out">
+         <Option output="/home/eliot2/School/CMSC/341/proj2/build-src/Driver.out" prefix_auto="0" extension_auto="0" />
          <Option working_dir="/home/eliot2/School/CMSC/341/proj2/build-src" />
          <Option object_output="./" />
          <Option type="1" />
@@ -34,14 +34,14 @@
             <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 driver.out" />
+            <Build command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 Driver.out" />
             <CompileFile command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
             <Clean command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 clean" />
             <DistClean command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
-      <Target title="driver.out/fast">
-         <Option output="/home/eliot2/School/CMSC/341/proj2/build-src/driver.out" prefix_auto="0" extension_auto="0" />
+      <Target title="Driver.out/fast">
+         <Option output="/home/eliot2/School/CMSC/341/proj2/build-src/Driver.out" prefix_auto="0" extension_auto="0" />
          <Option working_dir="/home/eliot2/School/CMSC/341/proj2/build-src" />
          <Option object_output="./" />
          <Option type="1" />
@@ -57,7 +57,7 @@
             <Add directory="/usr/local/include" />
          </Compiler>
          <MakeCommands>
-            <Build command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 driver.out/fast" />
+            <Build command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 Driver.out/fast" />
             <CompileFile command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
             <Clean command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 clean" />
             <DistClean command="/usr/bin/make -f &quot;/home/eliot2/School/CMSC/341/proj2/build-src/Makefile&quot;  VERBOSE=1 clean" />
@@ -81,6 +81,8 @@
       <Unit filename="/home/eliot2/School/CMSC/341/proj2/src/Word.cpp">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj2/src/BinarySearchTree.h">
+      </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj2/src/DebugLogger.h">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj2/src/Indexer.h">
       </Unit>

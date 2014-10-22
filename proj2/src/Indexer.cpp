@@ -1,10 +1,10 @@
 /**************************************************************
  * File:    Indexer.cpp
  * Project: CMSC 341 - Project 2 - Index Creator
- * Author : Eliot Carney-Seim
- * Date Due: 10/21/14
- * Section: 03
- * E-mail:  eliot2@umbc.edu
+ * Author : Austin Pagano
+ * Date   : 10/15/14
+ * Section: 02
+ * E-mail:  apagano1@umbc.edu
  *
  * Indexer class method definitions
  *
@@ -12,21 +12,25 @@
 
 #include "Indexer.h"
 #include <fstream>
+#include <cstdlib>
+
+#include <string.h>
 using namespace std;
+
+//the list of characters that need to be ignored when reading in words
+char IGNORE_LIST[] = " \t\n!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\"";
 
 Indexer::Indexer(string filterName, string dataFile)
 {
-	if ((FileExists(filterName)) && (FileExists(dataFile))) {
+	if ((FileExists(filterName)) && (FileExists(dataFile))) 
+	{
 		datafile = dataFile;
 		filterfile = filterName;
-		cout << "Files Found. Continuing." << endl;
 	}
 
 	//one or more of the files were not found, send error
 	else { 
-		cout << "how did I get in here?" << endl;
-		throw IllegalArgumentException(); 
-	}
+		throw IllegalArgumentException(); }
 
 }
 
@@ -35,76 +39,70 @@ void Indexer::FileFilterReader(string filterName)
 	//open the file
 	ifstream infile;
 	infile.open(filterName.c_str(), ios_base::in);
-
-	int lineNumber = 0;
 	string wordText;
+	
+	//distinguish between a word for filtered BST and indexed BST
+	int lineNumber = -1;
 
-	//read in all words from the file
-	while(!infile.eof())
+	//read in one line of the file
+	while(getline(infile, wordText))
 	{
-		string line;
-		getline(infile, line);
+		//get each word from the filter file
 
-		lineNumber += 1;
+		Word word = Word(wordText, lineNumber);
 
-		int size = line.size();
-
-		//line size may need to be changed to check for size of 0 not 1
-		for (int i = 0; i <= size; i++)
-		{
-			//check if we are at the end of reading a word
-			if (((line[0] == ' ') || (line[0] == NULL)) && (wordText.size() > 0))
-			{
-				//the word is complete and should not add a space
-				Word word(wordText, lineNumber);
-				
-				//check if the word is a duplicate
-				if (filteredBST.contains(word))
-				{
-					filteredBST.find(word).CountWord(lineNumber);
-				}
-
-				//the word is a new word so add to BST
-				else
-				{
-					filteredBST.insert(word);
-				}
-				
-
-				//now clear the wordtext
-				wordText.clear();
-			}
-
-			//word not complete
-			else 
-			{
-				//add the next letter
-				wordText += line[0];
-			}
-
-			//now delete the letter added or space
-			line.erase(line.begin());
-		}
+		filteredBST.insert(word);
 	}
 	infile.close();
 }
 
 void Indexer::FileWordReader(string dataFile)
 {
+	
 	//open the file
 	ifstream infile;
 	infile.open(dataFile.c_str(), ios_base::in);
+	
+	int lineNumber = 0;
 
-	//read in all words from file
-	while (!infile.eof())
+	string wordText;
+	string tempLineStr;
+	char* tempWord;
+	char* context;
+	char* tempLineChar;
+
+	//read in all words from the file
+	while(getline(infile, tempLineStr))
 	{
-		string word;
-		infile >> word;
+		//get the line as string so that it will stop at '\n' 
+		//and not have to allocate memory
 
-		//make sure the word is not to be ignored
-		if (!filteredBST.contains(word))
+		tempLineChar = (char*)tempLineStr.c_str();
+
+		lineNumber += 1;
+
+        tempWord = strtok_r(tempLineChar, IGNORE_LIST, &context);
+
+		while(tempWord != NULL)
 		{
-			indexedBST.insert(word);
+			wordText += tempWord;
+			
+			Word word = Word(wordText,lineNumber);
+
+			if (!filteredBST.contains(word) && (wordText.find('-', 0) != wordText.size() - 1) && (wordText.find('-', 0) != 0))
+			{
+				//this will look for the word in the BST, if found
+				//it will add one to that word's count and queue
+				//if not found then it will make the initial count for the new
+				//word
+				indexedBST.find(word).CountWord(lineNumber);
+
+				//insert the new word, will not insert it if it is a duplicate
+				indexedBST.insert(word);
+			}
+			//do not insert if it exists in the filtered BST
+			wordText.clear();
+            tempWord = strtok_r(NULL, IGNORE_LIST, &context);
 		}
 	}
 	infile.close();
@@ -122,7 +120,8 @@ void Indexer::DoIndex()
 
 void Indexer::OutputResults()
 {
-
+	//filteredBST.printTree();
+	indexedBST.printTree();
 }
 
 bool Indexer::FileExists(string filename)

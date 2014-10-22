@@ -19,6 +19,8 @@ iostream
 -
 string
 -
+ctime
+-
 Indexer.h
 /home/eliot2/School/CMSC/341/proj2/src/Indexer.h
 Word.h
@@ -28,6 +30,10 @@ Word.h
 Indexer.h
 /home/eliot2/School/CMSC/341/proj2/src/Indexer.h
 fstream
+-
+cstdlib
+-
+string.h
 -
 
 /home/eliot2/School/CMSC/341/proj2/src/Indexer.h
@@ -54,6 +60,8 @@ stdlib.h
 string
 -
 queue
+-
+sstream
 -
 
 /home/eliot2/School/CMSC/341/proj2/src/dsexceptions.h

@@ -99,24 +99,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named driver.out
+# Target rules for targets named Driver.out
 
 # Build rule for target.
-driver.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 driver.out
-.PHONY : driver.out
+Driver.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Driver.out
+.PHONY : Driver.out
 
 # fast build rule for target.
-driver.out/fast:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/build
-.PHONY : driver.out/fast
+Driver.out/fast:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/build
+.PHONY : Driver.out/fast
 
 Driver.o: Driver.cpp.o
 .PHONY : Driver.o
 
 # target to build an object file
 Driver.cpp.o:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Driver.cpp.o
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Driver.cpp.o
 .PHONY : Driver.cpp.o
 
 Driver.i: Driver.cpp.i
@@ -124,7 +124,7 @@ Driver.i: Driver.cpp.i
 
 # target to preprocess a source file
 Driver.cpp.i:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Driver.cpp.i
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Driver.cpp.i
 .PHONY : Driver.cpp.i
 
 Driver.s: Driver.cpp.s
@@ -132,7 +132,7 @@ Driver.s: Driver.cpp.s
 
 # target to generate assembly for a file
 Driver.cpp.s:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Driver.cpp.s
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Driver.cpp.s
 .PHONY : Driver.cpp.s
 
 Indexer.o: Indexer.cpp.o
@@ -140,7 +140,7 @@ Indexer.o: Indexer.cpp.o
 
 # target to build an object file
 Indexer.cpp.o:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Indexer.cpp.o
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Indexer.cpp.o
 .PHONY : Indexer.cpp.o
 
 Indexer.i: Indexer.cpp.i
@@ -148,7 +148,7 @@ Indexer.i: Indexer.cpp.i
 
 # target to preprocess a source file
 Indexer.cpp.i:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Indexer.cpp.i
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Indexer.cpp.i
 .PHONY : Indexer.cpp.i
 
 Indexer.s: Indexer.cpp.s
@@ -156,7 +156,7 @@ Indexer.s: Indexer.cpp.s
 
 # target to generate assembly for a file
 Indexer.cpp.s:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Indexer.cpp.s
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Indexer.cpp.s
 .PHONY : Indexer.cpp.s
 
 Word.o: Word.cpp.o
@@ -164,7 +164,7 @@ Word.o: Word.cpp.o
 
 # target to build an object file
 Word.cpp.o:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Word.cpp.o
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Word.cpp.o
 .PHONY : Word.cpp.o
 
 Word.i: Word.cpp.i
@@ -172,7 +172,7 @@ Word.i: Word.cpp.i
 
 # target to preprocess a source file
 Word.cpp.i:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Word.cpp.i
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Word.cpp.i
 .PHONY : Word.cpp.i
 
 Word.s: Word.cpp.s
@@ -180,7 +180,7 @@ Word.s: Word.cpp.s
 
 # target to generate assembly for a file
 Word.cpp.s:
-	$(MAKE) -f CMakeFiles/driver.out.dir/build.make CMakeFiles/driver.out.dir/Word.cpp.s
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Word.cpp.s
 .PHONY : Word.cpp.s
 
 # Help Target
@@ -189,7 +189,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... driver.out"
+	@echo "... Driver.out"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Driver.o"

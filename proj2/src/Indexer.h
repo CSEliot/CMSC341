@@ -3,7 +3,7 @@
  * Project: CMSC 341 - Project 2 - Index Creator
  * Author : Austin Pagano
  * Date   : 10/15/14
- * Section: 03
+ * Section: 02
  * E-mail:  apagano1@umbc.edu
  *
  * Indexer class header file

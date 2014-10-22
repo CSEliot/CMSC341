@@ -11,6 +11,7 @@
  *************************************************************/
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "Indexer.h"
 #include "Word.h"
 
@@ -46,10 +47,11 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     }
+	cout << "made it bitch!!" << endl;
+	
+    //Uncomment for number of seconds running.
+    cout << clock() / (float)CLOCKS_PER_SEC << endl;
 	int stop;
 	cin >> stop;
-    //Uncomment for number of seconds running.
-    //cout << clock() / (float)CLOCKS_PER_SEC) << endl;
-	cout << "all over now" << endl;
     return 0;
 }

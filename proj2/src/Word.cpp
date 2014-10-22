@@ -11,6 +11,8 @@
  *************************************************************/
 
 #include "Word.h"
+//#include <strstream>
+
 
 using namespace std;
 
@@ -18,16 +20,31 @@ Word::Word(){}
 
 Word::Word(string inWord, int lineNumber)
 {
-	lineNumbers.push(lineNumber);
-	count = 1;
-	wordText = NormalizeWord(inWord);
+	count = 0;
+
+	//distinguish between a word for filtered BST and indexed BST
+	if (lineNumber != -1)
+	{
+		ToLower(inWord);
+	}
+
+	wordText = inWord;
 }
 
 void Word::CountWord(int lineNumber)
 {
 	count += 1;
-	lineNumbers.push(lineNumber);
+
+	//add to the queue if it is empty
+	if (lineNumbers.empty())
+		lineNumbers.push(lineNumber);
+
+	//check for a duplicate line number
+	if (lineNumbers.back() != lineNumber)
+		lineNumbers.push(lineNumber);
+	
 }
+
 
 string Word::GetWord() const
 {
@@ -79,52 +96,106 @@ bool Word::operator==(const Word &RHS) const
 
 Word Word::operator=(const Word &RHS)
 {
-	//check if they are equal
-	if (!((*this) == RHS))
-	{
-		wordText = RHS.GetWord();
-		count = RHS.GetCount();
-		lineNumbers.empty();
-		lineNumbers = RHS.GetLineNumbers();
-	}
-	return (*this);
+     //check if they are equal
+    if (!((*this) == RHS))
+    {
+        wordText = RHS.GetWord();
+        count = RHS.GetCount();
+        lineNumbers.empty();
+        lineNumbers = RHS.GetLineNumbers();
+    }
+    return (*this);
 }
-string Word::NormalizeWord(string inWord)
+
+ostream& operator<< (ostream& out, const Word &inWord)
 {
-	//make all letters lower case
-	string lowerCaseWord = ToLower(inWord);
+	if (inWord.GetCount() == 0)
+	{
+		out << inWord.GetWord();
+	}
+	else
+	{
+		//print acording to the indexed words standards
 
-	//remove punctuation besides - and '
-	return RemovePunc(inWord);
+		//the line that will be printed to the console not including the queue
+		string line;
+
+		//add the word text and count of the word
+		line += inWord.GetWord();
+
+		//get where to insert the periods
+		int whereToInsert = line.size();
+
+        stringstream convertInt;
+        convertInt << inWord.GetCount();
+        line += convertInt.str();
+
+
+        //char buffer[10];
+        //line += itoa(inWord.GetCount(), buffer, 10);
+
+		//get the number of '.' to add
+		int numberOfPeriods = 23 - line.size();
+
+		//insert the periods
+		line.insert(whereToInsert, numberOfPeriods, '.');
+
+
+		//add the ':'
+		line += ": ";
+
+		//make a copy of the queue 
+		queue<int> temp = inWord.GetLineNumbers(); 
+
+		//print the queue
+		while (!temp.empty())
+		{
+            stringstream convertInt;
+            convertInt << temp.front();
+            line += convertInt.str();
+            line += ' ';
+			temp.pop();
+		}
+
+		out << line;
+	}
+
+	return out;
+
 }
 
-string Word::ToLower(string inWord)
+//string Word::NormalizeWord(string inWord)
+//{
+//	//make all letters lower case
+//	ToLower(inWord);
+//
+//	//remove punctuation besides - and '
+//	RemovePunc(inWord);
+//
+//	return inWord;
+//}
+
+void Word::ToLower(string & inWord)
 {
 	int size = inWord.size();
 	for (int i = 0; i < size; i++)
 	{
 		if ((inWord[i] >= 'A') && (inWord[i] <= 'Z'))
 		{
-			inWord[i] += ('z' - 'Z');
+			inWord[i] += 32;
 		}
 	}
-	return inWord;
 }
 
-string Word::RemovePunc(string inWord)
-{
-	string normalWord;
-	int size = inWord.size();
-
-	for (int i = 0; i < size; i++)
-	{
-		//the letter is an allowed letter
-		if((inWord[i] == 39) || (inWord[i] == '-') || ((inWord[i] >= 'a' && inWord[i] <= 'z')))
-		{
-			normalWord += inWord[i];
-		}
-
-		//do nothing so that the letter is not added to the result
-	}
-	return normalWord;
-}
+//void Word::RemovePunc(string & inWord)
+//{
+//	//go throug the word and erase any unwanted punctuation
+//	for (int i = 0; i < inWord.size(); i++)
+//	{
+//		//the letter is an allowed letter
+//		if((inWord[i] != 39) && (inWord[i] != '-') && (!(inWord[i] >= 'a' && inWord[i] <= 'z')))
+//		{
+//			inWord.erase(i,i + 1);
+//		}
+//	}
+//}

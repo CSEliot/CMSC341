@@ -67,10 +67,13 @@ public:
 	//Returns x if it exists in the BST
 	Comparable & find( Comparable & x ) 
 	{
-		if (!contains(x))
-		{
-			//return something to indicate x was not found
-		}
+		//if (!contains(x))
+		//{
+		//	//return the initial comparable pointer if it was not found in the BST
+		//	return x;
+		//}
+
+		//return the found pointer
 		return find(x, root);
 	}
 
@@ -95,7 +98,7 @@ public:
     /**
      * Print the tree contents in sorted order.
      */
-    void printTree( ostream & out = cout ) const
+    void printTree( ostream & out = cout )
     {
         if( isEmpty( ) )
             out << "Empty tree" << endl;
@@ -170,8 +173,7 @@ private:
             insert( x, t->left );
         else if( t->element < x )
             insert( x, t->right );
-        else
-            ;  // Duplicate; do nothing
+        else;  // Duplicate; do nothing
     }
 
     /**
@@ -233,12 +235,14 @@ private:
 	*/
 	Comparable & find( Comparable & x, BinaryNode *t)
 	{
-		if ( x < t->element )
-			return find( x, t->left);
+		if ( t == NULL )
+			return x;
 		else if (t->element < x)
 			return find( x, t->right);
+		else if (x < t->element)
+			return find( x, t->left);
 		else
-			return t->element;
+			return t->element; //Match found
 	}
 
     /**
@@ -289,7 +293,7 @@ private:
     /**
      * Internal method to print a subtree rooted at t in sorted order.
      */
-    void printTree( BinaryNode *t, ostream & out ) const
+    void printTree( BinaryNode *t, ostream & out )
     {
         if( t != NULL )
         {
