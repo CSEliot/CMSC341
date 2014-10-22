@@ -1,12 +1,12 @@
 /**************************************************************
  * File:    Word.cpp
  * Project: CMSC 341 - Project 2 - Index Creator
- * Author : Austin Pagano
- * Date   : 10/15/14
- * Section: 02
- * E-mail:  apagano1@umbc.edu
+ * Author : Eliot Carney-Seim
+ * Date  Due: 10/21/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
  *
- * Word class method definitions
+ * A specialized wrapper data type for strings and tokenized file words.
  *
  *************************************************************/
 
@@ -18,184 +18,117 @@ using namespace std;
 
 Word::Word(){}
 
-Word::Word(string inWord, int lineNumber)
-{
+Word::Word(string inWord, int lineNumber){
 	count = 0;
-
-	//distinguish between a word for filtered BST and indexed BST
-	if (lineNumber != -1)
-	{
-		ToLower(inWord);
-	}
-
-	wordText = inWord;
+	if (lineNumber != -1){
+        //a trick in code to determine filter vs book.
+        LowerAlpha(inWord);
+        wordText = inWord;
+    }else{
+        wordText = inWord;
+    }
 }
 
-void Word::CountWord(int lineNumber)
-{
-	count += 1;
-
-	//add to the queue if it is empty
-	if (lineNumbers.empty())
+void Word::CountWord(int lineNumber){
+    count ++;
+    if (lineNumbers.empty()){
+        //if nothing is in the queue, simply push
 		lineNumbers.push(lineNumber);
-
-	//check for a duplicate line number
-	if (lineNumbers.back() != lineNumber)
+    }else if(lineNumbers.back() != lineNumber){
+        //don't add line locations twice, so if it appears twice on a line, don't add.
 		lineNumbers.push(lineNumber);
-	
+    }
 }
 
-
-string Word::GetWord() const
-{
-	return wordText;
-}
-
-int Word::GetCount() const
-{
-	return count;
-}
-
-queue<int> Word::GetLineNumbers() const
-{
-	return lineNumbers;
-}
-
-bool Word::operator<(const Word &RHS) const
-{
+bool Word::operator<(const Word &RHS) const{
 	string LHS = GetWord();
-
-	for (int i = 0; ((i < LHS.size()) && (i < RHS.GetWord().size())); i++)
-	{
-		//basic check if the letter in LHS word is smaller than letter in RHS
-		if (LHS[i] < RHS.GetWord()[i])
-		{return true;}
-
-		if (LHS[i] > RHS.GetWord()[i])
-		{return false;}
-
+	for (int i = 0; ((i < LHS.size()) && (i < RHS.GetWord().size())); i++){
+        //		check if left is greater than right, or right greater than left.
+        if (LHS[i] < RHS.GetWord()[i]){
+            return true;}
+        if (LHS[i] > RHS.GetWord()[i]){
+            return false;
+        }
 	}
-	//letters are found to be equal throughout the loop, check for size
-	
-	//return true if LHS is a longer word then RHS
+    //if one word contains the other, compare size.
 	return (LHS.size() < RHS.GetWord().size());
-	
 }
 
-bool Word::operator==(const Word &RHS) const
-{
-	string LHS = GetWord();
-
-	for (int i = 0; (i < LHS.size()) && (i < RHS.GetWord().size()); i++)
-	{
-		if (LHS[i] != RHS.GetWord()[i])
-		{return false;}
+bool Word::operator==(const Word &RHS) const{
+    string sLHS = GetWord();
+    string sRHS = RHS.GetWord();
+    for (int i = 0; (i < sLHS.size()) && (i < sRHS.size()); i++){
+        if (sLHS[i] != sRHS[i]){
+            //compare the strings letter for letter, any fails return false.
+            return false;
+        }
 	}
 	return true;
 }
 
-Word Word::operator=(const Word &RHS)
-{
-     //check if they are equal
-    if (!((*this) == RHS))
-    {
-        wordText = RHS.GetWord();
+Word Word::operator=(const Word &RHS){
+    if (!((*this) == RHS)){
+        //if word wrappers aren't equal, reassign new values in.
         count = RHS.GetCount();
+        wordText = RHS.GetWord();
         lineNumbers.empty();
         lineNumbers = RHS.GetLineNumbers();
     }
     return (*this);
 }
 
-ostream& operator<< (ostream& out, const Word &inWord)
-{
-	if (inWord.GetCount() == 0)
-	{
+ostream& operator<< (ostream& out, const Word &inWord){
+    if (inWord.GetCount() == 0){
+        //redirect output and do no formatting if it's an empty wrapper.
 		out << inWord.GetWord();
 	}
-	else
-	{
-		//print acording to the indexed words standards
+	else{
+        //format the output.
+        string line; //initialized line to be formatted to console/file.
+        line += inWord.GetWord(); //add word to line.
+        int periodInsert = line.size(); //distance to add count
+        stringstream convertInt; //convert string to int.
+        convertInt << inWord.GetCount(); //throw int into stringstream
+        line += convertInt.str(); //get converted integer.
+        int distanceFromRight = 23; //period formatting.
+        int totalPeriodsNum = distanceFromRight - line.size();
+        line.insert(periodInsert, totalPeriodsNum, '.'); //format in the periods/dots.
+        line += ": "; //format in the colon.
+        queue<int> tempQueue = inWord.GetLineNumbers();// build temp.
 
-		//the line that will be printed to the console not including the queue
-		string line;
-
-		//add the word text and count of the word
-		line += inWord.GetWord();
-
-		//get where to insert the periods
-		int whereToInsert = line.size();
-
-        stringstream convertInt;
-        convertInt << inWord.GetCount();
-        line += convertInt.str();
-
-
-        //char buffer[10];
-        //line += itoa(inWord.GetCount(), buffer, 10);
-
-		//get the number of '.' to add
-		int numberOfPeriods = 23 - line.size();
-
-		//insert the periods
-		line.insert(whereToInsert, numberOfPeriods, '.');
-
-
-		//add the ':'
-		line += ": ";
-
-		//make a copy of the queue 
-		queue<int> temp = inWord.GetLineNumbers(); 
-
-		//print the queue
-		while (!temp.empty())
-		{
+        while (!tempQueue.empty()){
+            //loop through whole queue, and format in the proper line findings.
             stringstream convertInt;
-            convertInt << temp.front();
+            convertInt << tempQueue.front();
             line += convertInt.str();
+            //^^above is int to string conversion again
             line += ' ';
-			temp.pop();
+            tempQueue.pop();
 		}
-
-		out << line;
+        out << line; //send the stream out of the properly fomatted line.
 	}
-
 	return out;
-
 }
 
-//string Word::NormalizeWord(string inWord)
-//{
-//	//make all letters lower case
-//	ToLower(inWord);
-//
-//	//remove punctuation besides - and '
-//	RemovePunc(inWord);
-//
-//	return inWord;
-//}
-
-void Word::ToLower(string & inWord)
-{
-	int size = inWord.size();
-	for (int i = 0; i < size; i++)
-	{
-		if ((inWord[i] >= 'A') && (inWord[i] <= 'Z'))
-		{
-			inWord[i] += 32;
-		}
+void Word::LowerAlpha(string & inWord){
+    //Python inspired script! :D
+    int wordSize = inWord.size();
+    for (int i = 0; i < wordSize; i++){
+        if ( (inWord[i] <= 'Z') && (inWord[i] >= 'A')){
+            //move all alphanumeric characters up the character chart nums
+            inWord[i] += 32;
+        }
 	}
 }
 
-//void Word::RemovePunc(string & inWord)
-//{
-//	//go throug the word and erase any unwanted punctuation
-//	for (int i = 0; i < inWord.size(); i++)
-//	{
-//		//the letter is an allowed letter
-//		if((inWord[i] != 39) && (inWord[i] != '-') && (!(inWord[i] >= 'a' && inWord[i] <= 'z')))
-//		{
-//			inWord.erase(i,i + 1);
-//		}
-//	}
-//}
+string Word::GetWord() const{
+    return wordText;
+}
+
+int Word::GetCount() const{
+    return count;
+}
+
+queue<int> Word::GetLineNumbers() const{
+    return lineNumbers;
+}

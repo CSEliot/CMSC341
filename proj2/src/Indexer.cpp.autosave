@@ -94,7 +94,7 @@ void Indexer::OutputResults(){
     streambuf *coutbuf = cout.rdbuf();
     cout.rdbuf(out.rdbuf());
     filteredBST.printTree();
-    cout.rdbuf(coutbuf);
+    cout.rdbuf(coutbuf->r);
 
     indexedBST.printTree();
 }

@@ -46,9 +46,7 @@ int main(int argc, char *argv[]) {
             cout << "EXCEPTION: " << cException.GetMessage() << endl;
             return 1;
         }
-    }
-	cout << "made it bitch!!" << endl;
-	
+    }	
     //Uncomment for number of seconds running.
     cout << clock() / (float)CLOCKS_PER_SEC << endl;
 	int stop;

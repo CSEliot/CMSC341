@@ -1,18 +1,18 @@
 /**************************************************************
  * File:    Indexer.h
  * Project: CMSC 341 - Project 2 - Index Creator
- * Author : Austin Pagano
- * Date   : 10/15/14
- * Section: 02
- * E-mail:  apagano1@umbc.edu
+ * Author : Eliot Carney-Seim
+ * Date  Due: 10/21/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
  *
- * Indexer class header file
+ * The Indexer class heder file
  *
  *************************************************************/
 
+#include <string>
 #include <iostream>
 #include <stdlib.h>
-#include <string>
 #include "BinarySearchTree.h"
 #include "exceptions.h"
 
@@ -27,7 +27,7 @@ public:
 	void DoIndex();
 
 private:
-	bool FileExists(std::string filename);
+    bool FileExists(std::string filename);
 	void FileFilterReader(std::string filename);
 	void FileWordReader(std::string filename);
 	void OutputResults();

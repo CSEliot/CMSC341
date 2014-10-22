@@ -64,16 +64,9 @@ public:
         return findMax( root )->element;
     }
 
-	//Returns x if it exists in the BST
+    //searches for type child of comparable
 	Comparable & find( Comparable & x ) 
 	{
-		//if (!contains(x))
-		//{
-		//	//return the initial comparable pointer if it was not found in the BST
-		//	return x;
-		//}
-
-		//return the found pointer
 		return find(x, root);
 	}
 
@@ -229,9 +222,10 @@ private:
     }
 
 	/*
-	Internal method to find a specific Comparable
-	x is the target item
-	t is the node that roots the subtree
+     * RECURSIVE VERSION
+    Internal method for finding the comparable type, specifically
+    x is the searching for item
+    t is the recursive search node.
 	*/
 	Comparable & find( Comparable & x, BinaryNode *t)
 	{

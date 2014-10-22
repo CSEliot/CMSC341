@@ -6,7 +6,7 @@
  * Section: 03
  * E-mail:  eliot2@umbc.edu
  *
- * Word class header file
+ * A specialized wrapper data type for strings and tokenized file words.
  *
  *************************************************************/
 
@@ -23,31 +23,22 @@ class Word
 {
 public:
 	Word();
-	Word(std::string inWord, int lineNumber = 0);
-
-	//adds a count to the word counter and adds the line number 
-	//to the queue if the line number is not already in there
+    Word(std::string inWord, int lineNumber = 0);
 	void CountWord(int lineNumber);
-
 	std::string GetWord() const;
-	int GetCount() const;
-	std::queue<int> GetLineNumbers() const;
-
-	bool operator< (const Word &RHS) const;
-	Word operator= (const Word &RHS);
+    int GetCount() const; //# of times the word occurred in the file & keeps line history
+    bool operator< (const Word &RHS) const; //comparison overload for wrapper class.
+    Word operator= (const Word &RHS);// wrapper feature reassignment
 	bool operator== (const Word &RHS) const;
-	void ToLower(std::string & inWord);
-
-	friend std::ostream& operator<< (std::ostream& out, const Word &inWord);
+    friend std::ostream& operator<< (std::ostream& out, const Word &inWord);
 
 private:
 	int count;
 	std::queue<int> lineNumbers;
 	std::string wordText;
 
-	std::string NormalizeWord(std::string inWord);
-	
-	void RemovePunc(std::string & inWord);
+    void LowerAlpha(std::string & inWord); //python inspired helper script
+    std::queue<int> GetLineNumbers() const; //helper getter for lineNumber
 };
 
 std::ostream& operator<< (std::ostream& out, const Word &inWord);

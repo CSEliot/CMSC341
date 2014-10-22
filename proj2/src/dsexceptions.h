@@ -1,10 +1,10 @@
 /**************************************************************
  * File:    dsexceptions.h
  * Project: CMSC 341 - Project 2 - Index Creator
- * Author : Austin Pagano
- * Date   : 10/15/14
- * Section: 02
- * E-mail:  apagano1@umbc.edu
+ * Author : ELiot Carney-Seim
+ * Date  Due: 10/21/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
  *
  * DsExceptions class header file
  * Sends out the correct error messages
