@@ -16,8 +16,7 @@
 
 #include <string.h>
 using namespace std;
-
-const char GENERIC_FILTER_LIST[] = " \t\n!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\"";
+const char GENERIC_FILTER_LIST[] = "\t \n \r '.!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\";";
 //the above was found online as a resource for general exception cases for filtering.
 
 
@@ -90,13 +89,17 @@ void Indexer::DoIndex(){
 }
 
 void Indexer::OutputResults(){
-    ofstream out("filterResults.txt");
-    streambuf *coutbuf = cout.rdbuf();
-    cout.rdbuf(out.rdbuf());
+    ofstream out1("filterResults.txt");
+    streambuf *coutbuf1 = cout.rdbuf();
+    cout.rdbuf(out1.rdbuf());
     filteredBST.printTree();
-    cout.rdbuf(coutbuf);
+    cout.rdbuf(coutbuf1);
 
+    ofstream out2("indexResults.txt");
+    streambuf *coutbuf2 = cout.rdbuf();
+    cout.rdbuf(out2.rdbuf());
     indexedBST.printTree();
+    cout.rdbuf(coutbuf2);
 }
 
 bool Indexer::FileExists(string filename){

@@ -37,7 +37,16 @@ private:
 	std::queue<int> lineNumbers;
 	std::string wordText;
 
+    /*Helper Function, Python Inspired, to write the script up the char hex list
+     * Pre: word should contain alphanumeric characters
+     * Post: all lowercase alphanumeric characters
+     */
     void LowerAlpha(std::string & inWord); //python inspired helper script
+    /* Specialized helper function to get the line number in a non public manor.
+     * Simply for standard practice purposes.
+     * Pre: None
+     * Post: None
+     */
     std::queue<int> GetLineNumbers() const; //helper getter for lineNumber
 };
 

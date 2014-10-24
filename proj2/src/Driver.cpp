@@ -48,8 +48,8 @@ int main(int argc, char *argv[]) {
         }
     }	
     //Uncomment for number of seconds running.
-    cout << clock() / (float)CLOCKS_PER_SEC << endl;
-	int stop;
-	cin >> stop;
-    return 0;
+//    cout << clock() / (float)CLOCKS_PER_SEC << endl;
+//	int stop;
+//	cin >> stop;
+//    return 0;
 }
