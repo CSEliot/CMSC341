@@ -8,8 +8,22 @@
 #include <boost/range/algorithm/remove_if.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
-const bool DEBUG = true;
-const char GENERIC_FILTER_LIST[] = "\t \n \r '.!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\";";
+/**************************************************************
+ * File:    Util.h
+ * Project: CMSC 341 - Project 3 - Splay Trees
+ * Author : Eliot Carney-Seim
+ * Date  Due: 11/4/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
+ *
+ * The Util class methd definitions
+ *
+ *************************************************************/
+
+
+
+const bool DEBUG = false;
+const char GENERIC_FILTER_LIST[] = "\t \n \r `.!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\";";
 
 static void printDebug(std::string message){
     if(DEBUG){
@@ -34,10 +48,18 @@ public:
      * Post: A string that does not contain any of the generic filter list.
      */
     static std::string Strip(std::string inString){
+        //remove - at beginning and end of words
         while(inString.size() != 0 && inString.find('-', 0) == 0){
             inString.erase(0, 1);
         }
         while(inString.size() != 0 && inString.find('-', inString.size()-1) == inString.size()-1){
+            inString.erase(inString.size()-1, 1);
+        }
+        //remove ' at beginning and end of words
+        while(inString.size() != 0 && inString.find('\'', 0) == 0){
+            inString.erase(0, 1);
+        }
+        while(inString.size() != 0 && inString.find('\'', inString.size()-1) == inString.size()-1){
             inString.erase(inString.size()-1, 1);
         }
         inString.erase(boost::remove_if(inString,

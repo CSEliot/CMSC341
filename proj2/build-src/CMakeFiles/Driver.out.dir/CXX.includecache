@@ -14,18 +14,6 @@ Word.h
 iostream
 -
 
-/home/eliot2/School/CMSC/341/proj2/src/Driver.cpp
-iostream
--
-string
--
-ctime
--
-Indexer.h
-/home/eliot2/School/CMSC/341/proj2/src/Indexer.h
-Word.h
-/home/eliot2/School/CMSC/341/proj2/src/Word.h
-
 /home/eliot2/School/CMSC/341/proj2/src/Indexer.cpp
 Indexer.h
 /home/eliot2/School/CMSC/341/proj2/src/Indexer.h
@@ -47,10 +35,6 @@ BinarySearchTree.h
 /home/eliot2/School/CMSC/341/proj2/src/BinarySearchTree.h
 exceptions.h
 /home/eliot2/School/CMSC/341/proj2/src/exceptions.h
-
-/home/eliot2/School/CMSC/341/proj2/src/Word.cpp
-Word.h
-/home/eliot2/School/CMSC/341/proj2/src/Word.h
 
 /home/eliot2/School/CMSC/341/proj2/src/Word.h
 iostream

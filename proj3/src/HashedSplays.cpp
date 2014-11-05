@@ -1,4 +1,19 @@
 #include "HashedSplays.h"
+
+/**************************************************************
+ * File:    HashedSplays.cpp
+ * Project: CMSC 341 - Project 3 - Splay Trees
+ * Author : Eliot Carney-Seim
+ * Date  Due: 11/4/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
+ *
+ * The HashedSplays class methd definitions
+ *
+ *************************************************************/
+
+
+
 using namespace std;
 
 
@@ -98,4 +113,12 @@ void HashedSplays::FindAll(string inPart){
     }
     table[index] = matchTree;
     matchTree.printTree();
+}
+
+void HashedSplays::PrintHashCountResults(){
+    for(int i = 0; i < m_trees-1; i++){
+        table[i].printRoot();
+    }
+
+
 }

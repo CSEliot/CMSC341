@@ -13,12 +13,15 @@ using namespace std;
 // ******************PUBLIC OPERATIONS*********************
 // void insert( x )       --> Insert x
 // void remove( x )       --> Remove x
+// Comparable removeWithRef( x )  --> Removes x and passes new copy.
 // bool contains( x )     --> Return true if x is present
+// Comparable containsWithRef(x)  --> Returns a reference to found node.
 // Comparable findMin( )  --> Return smallest item
 // Comparable findMax( )  --> Return largest item
 // bool isEmpty( )        --> Return true if empty; else false
 // void makeEmpty( )      --> Remove all items
 // void printTree( )      --> Print tree in sorted order
+// void printRoot( )     --> Prints root and # of nodes in root's tree
 // ******************ERRORS********************************
 // Throws UnderflowException as warranted
 
@@ -103,6 +106,10 @@ class SplayTree
         return root->element == x;
     }
 
+    /*Returns a copy of the foundobject
+     * Pre: an existing node to search for
+     * Post: a copy of a node
+     */
     Comparable &  containsWithRef( Comparable & x )
     {
         splay( x, root );
@@ -114,6 +121,14 @@ class SplayTree
     bool isEmpty( ) const
     {
         return root == nullNode;
+    }
+
+    void printRoot() const{
+        if( isEmpty( ) ){
+            cout << "Empty tree" << endl;
+        }else{
+            cout << root->element <<"and has " << totalNodes << " nodes" << endl;
+        }
     }
 
     void printTree( ) const
@@ -139,7 +154,7 @@ class SplayTree
             remove( root->element );
         }
     }
-    void insert(Comparable & x )
+    void insert(const Comparable & x )
     {
         /*
         //check to see if it exists already
@@ -147,7 +162,7 @@ class SplayTree
             containsWithRef(x).IncrementFrequency();
             printDebug("Inserted already exists: " + );
         }*/
-
+        totalNodes++;
         static BinaryNode *newNode = NULL;
 
         if( newNode == NULL )
@@ -202,10 +217,14 @@ class SplayTree
             newTree->right = root->right;
         }
         delete root;
-        totalNodes --;
+        totalNodes--;
         root = newTree;
     }
 
+    /*Creates a copy of the removed node that gets deleted and returns it
+     * Pre: A matching node.
+     * Post: A copy of the removed node.
+     */
     Comparable  removeWithRef( const Comparable & x )
     {
         BinaryNode *newTree;
@@ -223,7 +242,6 @@ class SplayTree
         }
         tempNode = root->element;
         delete root;
-        totalNodes --;
         root = newTree;
         return tempNode;
     }

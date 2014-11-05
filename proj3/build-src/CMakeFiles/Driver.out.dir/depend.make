@@ -18,4 +18,5 @@ CMakeFiles/Driver.out.dir/driver.cpp.o: /home/eliot2/School/CMSC/341/proj3/src/S
 CMakeFiles/Driver.out.dir/driver.cpp.o: /home/eliot2/School/CMSC/341/proj3/src/Util.h
 CMakeFiles/Driver.out.dir/driver.cpp.o: /home/eliot2/School/CMSC/341/proj3/src/driver.cpp
 CMakeFiles/Driver.out.dir/driver.cpp.o: /home/eliot2/School/CMSC/341/proj3/src/dsexceptions.h
+CMakeFiles/Driver.out.dir/driver.cpp.o: /home/eliot2/School/CMSC/341/proj3/src/exceptions.h
 

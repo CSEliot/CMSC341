@@ -3,6 +3,20 @@
 #include "SplayTree.h"
 #include "Node.h"
 #include "Util.h"
+
+/**************************************************************
+ * File:    HashedSplays.h
+ * Project: CMSC 341 - Project 3 - Splay Trees
+ * Author : Eliot Carney-Seim
+ * Date  Due: 11/4/14
+ * Section: 03
+ * E-mail:  eliot2@umbc.edu
+ *
+ * The HashedSplays class methd definitions
+ *
+ *************************************************************/
+
+
 class HashedSplays
 {
 public:
@@ -33,7 +47,7 @@ public:
      * Pre: None
      * Post: Printed statement.
      */
-    void PrintHashCounts();
+    void PrintHashCountResults();
 
     /*Find words within a certain tree index
      * Pre: A pattern to parse a tree for.

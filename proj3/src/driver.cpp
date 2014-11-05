@@ -11,36 +11,42 @@
  *************************************************************/
 #include "HashedSplays.h"  // Includes constants
 #include "Util.h"
+
+#include "exceptions.h"
+#include "dsexceptions.h"
+
 using namespace std;
 
-int main(int argc, char* argv[]){
+//int main(int argc, char* argv[]){
 
-    string testStr = "-Pie-s12@-p^-";
-    string findTest = "to";
-    printDebug(testStr + "g");
-    printDebug("Test");
-    printDebug(testStr = Util::Lower(testStr));
-    printDebug(testStr = Util::Strip(testStr));
-    bool fileIs = Util::FileExists(argv[1]);
-    cout << "Does this file exist? " << argv[1] << " " << fileIs << endl;
-    HashedSplays testHash(26);
-    testHash.FileReader(argv[1]);
-    testHash.PrintTree(18);
-    testHash.PrintTree(19);
-    testHash.PrintTree(20);
-    testHash.FindAll(findTest);
-    return 0;
-}
+//    string testStr = "-Pie-s12@-p^-";
+//    string findTest = "to";
+//    printDebug(testStr + "g");
+//    printDebug("Test");
+//    printDebug(testStr = Util::Lower(testStr));
+//    printDebug(testStr = Util::Strip(testStr));
+//    bool fileIs = Util::FileExists(argv[1]);
+//    cout << "Does this file exist? " << argv[1] << " " << fileIs << endl;
+//    HashedSplays testHash(26);
+//    testHash.FileReader(argv[1]);
+//    testHash.PrintTree(18);
+//    testHash.PrintTree(19);
+//    testHash.PrintTree(20);
+//    testHash.FindAll(findTest);
+//    testHash.PrintHashCountResults();
+//    return 0;
+//}
 
-/*
+
 int main(int argc, char *argv[]) {
     try {
         // Instatiate the main object
-        HashedSplays wordFrequecy(ALPHABET_SIZE);
+        HashedSplays wordFrequecy(26);
         // Build the trees
         wordFrequecy.FileReader(argv[1]);
 
         // Test methods to show hashed splay trees work
+        wordFrequecy.PrintTree(3);
         wordFrequecy.PrintHashCountResults();
         wordFrequecy.PrintTree(19); // Prints the "T" tree
         wordFrequecy.PrintTree("F");
@@ -58,4 +64,4 @@ int main(int argc, char *argv[]) {
     //Uncomment for number of seconds running.
     //cout << clock() / (float)CLOCKS_PER_SEC) << endl;
     return 0;
-}*/
+}
