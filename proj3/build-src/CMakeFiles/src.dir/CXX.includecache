@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/eliot2/School/CMSC/341/proj3/src/HashedSplays.cpp
+HashedSplays.h
+/home/eliot2/School/CMSC/341/proj3/src/HashedSplays.h
+
+/home/eliot2/School/CMSC/341/proj3/src/HashedSplays.h
+
+/home/eliot2/School/CMSC/341/proj3/src/driver.cpp
+HashedSplays.h
+/home/eliot2/School/CMSC/341/proj3/src/HashedSplays.h
+

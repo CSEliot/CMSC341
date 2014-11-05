@@ -99,24 +99,48 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named src
+# Target rules for targets named Driver.out
 
 # Build rule for target.
-src: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 src
-.PHONY : src
+Driver.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Driver.out
+.PHONY : Driver.out
 
 # fast build rule for target.
-src/fast:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/build
-.PHONY : src/fast
+Driver.out/fast:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/build
+.PHONY : Driver.out/fast
+
+HashedSplays.o: HashedSplays.cpp.o
+.PHONY : HashedSplays.o
+
+# target to build an object file
+HashedSplays.cpp.o:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/HashedSplays.cpp.o
+.PHONY : HashedSplays.cpp.o
+
+HashedSplays.i: HashedSplays.cpp.i
+.PHONY : HashedSplays.i
+
+# target to preprocess a source file
+HashedSplays.cpp.i:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/HashedSplays.cpp.i
+.PHONY : HashedSplays.cpp.i
+
+HashedSplays.s: HashedSplays.cpp.s
+.PHONY : HashedSplays.s
+
+# target to generate assembly for a file
+HashedSplays.cpp.s:
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/HashedSplays.cpp.s
+.PHONY : HashedSplays.cpp.s
 
 Node.o: Node.cpp.o
 .PHONY : Node.o
 
 # target to build an object file
 Node.cpp.o:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Node.cpp.o
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Node.cpp.o
 .PHONY : Node.cpp.o
 
 Node.i: Node.cpp.i
@@ -124,7 +148,7 @@ Node.i: Node.cpp.i
 
 # target to preprocess a source file
 Node.cpp.i:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Node.cpp.i
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Node.cpp.i
 .PHONY : Node.cpp.i
 
 Node.s: Node.cpp.s
@@ -132,7 +156,7 @@ Node.s: Node.cpp.s
 
 # target to generate assembly for a file
 Node.cpp.s:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/Node.cpp.s
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/Node.cpp.s
 .PHONY : Node.cpp.s
 
 driver.o: driver.cpp.o
@@ -140,7 +164,7 @@ driver.o: driver.cpp.o
 
 # target to build an object file
 driver.cpp.o:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/driver.cpp.o
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/driver.cpp.o
 .PHONY : driver.cpp.o
 
 driver.i: driver.cpp.i
@@ -148,7 +172,7 @@ driver.i: driver.cpp.i
 
 # target to preprocess a source file
 driver.cpp.i:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/driver.cpp.i
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/driver.cpp.i
 .PHONY : driver.cpp.i
 
 driver.s: driver.cpp.s
@@ -156,32 +180,8 @@ driver.s: driver.cpp.s
 
 # target to generate assembly for a file
 driver.cpp.s:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/driver.cpp.s
+	$(MAKE) -f CMakeFiles/Driver.out.dir/build.make CMakeFiles/Driver.out.dir/driver.cpp.s
 .PHONY : driver.cpp.s
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -189,18 +189,18 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... Driver.out"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... src"
+	@echo "... HashedSplays.o"
+	@echo "... HashedSplays.i"
+	@echo "... HashedSplays.s"
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"
 	@echo "... driver.o"
 	@echo "... driver.i"
 	@echo "... driver.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 

@@ -3,6 +3,7 @@
 
 #include "dsexceptions.h"
 #include <iostream>        // For NULL
+#include "Util.h"
 using namespace std;
 
 // SplayTree class
@@ -30,6 +31,8 @@ class SplayTree
         nullNode = new BinaryNode;
         nullNode->left = nullNode->right = nullNode;
         root = nullNode;
+        splayCount = 0;
+        totalNodes = 0;
     }
 
     SplayTree( const SplayTree & rhs )
@@ -38,6 +41,7 @@ class SplayTree
         nullNode->left = nullNode->right = nullNode;
         root = nullNode;
         *this = rhs;
+        splayCount = 0;
     }
 
     ~SplayTree( )
@@ -99,6 +103,14 @@ class SplayTree
         return root->element == x;
     }
 
+    Comparable &  containsWithRef( Comparable & x )
+    {
+        splay( x, root );
+        if(root->element == x){
+            return root->element;
+        }
+    }
+
     bool isEmpty( ) const
     {
         return root == nullNode;
@@ -127,9 +139,15 @@ class SplayTree
             remove( root->element );
         }
     }
-
-    void insert( const Comparable & x )
+    void insert(Comparable & x )
     {
+        /*
+        //check to see if it exists already
+        if(contains(x)){
+            containsWithRef(x).IncrementFrequency();
+            printDebug("Inserted already exists: " + );
+        }*/
+
         static BinaryNode *newNode = NULL;
 
         if( newNode == NULL )
@@ -184,10 +202,34 @@ class SplayTree
             newTree->right = root->right;
         }
         delete root;
+        totalNodes --;
         root = newTree;
     }
 
-    const SplayTree & operator=( const SplayTree & rhs )
+    Comparable  removeWithRef( const Comparable & x )
+    {
+        BinaryNode *newTree;
+        Comparable tempNode;
+            // If x is found, it will be at the root
+        if( root->left == nullNode )
+            newTree = root->right;
+        else
+        {
+            // Find the maximum in the left subtree
+            // Splay it to the root; and then attach right child
+            newTree = root->left;
+            splay( x, newTree );
+            newTree->right = root->right;
+        }
+        tempNode = root->element;
+        delete root;
+        totalNodes --;
+        root = newTree;
+        return tempNode;
+    }
+
+
+    const SplayTree<Comparable> & operator=( const SplayTree<Comparable> & rhs )
     {
         if( this != &rhs )
         {
@@ -198,7 +240,19 @@ class SplayTree
         return *this;
     }
 
+
+    int getSplayCount(){
+        return splayCount;
+    }
+    int getTotalNodes(){
+        return totalNodes;
+    }
+
 private:
+
+    int splayCount;
+    int totalNodes;
+
     struct BinaryNode
     {
         Comparable  element;
@@ -281,6 +335,7 @@ private:
      */
     void splay( const Comparable & x, BinaryNode * & t )
     {
+        splayCount ++;
         BinaryNode *leftTreeMax, *rightTreeMin;
         static BinaryNode header;
 

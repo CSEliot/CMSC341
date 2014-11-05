@@ -10,6 +10,7 @@
  *************************************************************/
 #include "Node.h"
 
+
 using namespace std;
 
 //No parameter constructor for containers
@@ -58,7 +59,6 @@ bool Node::operator%(const Node& RHS) const
     //We want to ignore case on this check
     string text = this->GetWord();
     text = Util::Lower(text);
-    
     string compared = RHS.GetWord();
     compared = Util::Lower(compared);
     
@@ -103,3 +103,4 @@ string Node::GetWord() const
 {
     return m_word;
 }
+

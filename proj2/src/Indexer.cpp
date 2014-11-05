@@ -16,7 +16,7 @@
 
 #include <string.h>
 using namespace std;
-const char GENERIC_FILTER_LIST[] = "\t \n \r '.!#$%&()*+,./0123456789:;<=>?@[]^_`~{|}\";";
+const char GENERIC_FILTER_LIST[] = "\t \n \r '.!#$%&()`*+,./0123456789:;<=>?@[]^_`~{|}\";";
 //the above was found online as a resource for general exception cases for filtering.
 
 
@@ -68,9 +68,10 @@ void Indexer::FileWordReader(string dataFile){
             wordString += tempWord;
             Word word(wordString,lineNumber);
 
-            if ( (wordString.find('-', 0) != wordString.size() - 1) //if hyphen is IN the word
+            if ( (wordString.find('-', 0) != wordString.size() - 1) //if hyphen is IN the word at 0
                  && !filteredBST.contains(word) // if NOT already in the BST
                  && (wordString.find('-', 0) != 0)){ // and hyphen not at beginning, so IN word
+
                 indexedBST.find(word).CountWord(lineNumber); // word count ++, from 0, etc.
                 indexedBST.insert(word); //insert word, but not duplicate
 			}

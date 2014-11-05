@@ -1,5 +1,5 @@
 project(src)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.6)
 aux_source_directory(. SRC_LIST)
-add_executable(${PROJECT_NAME} ${SRC_LIST})
-
+file(GLOB SRC . *.cpp *.h *.txt)
+add_executable  (Driver.out ${SRC})
