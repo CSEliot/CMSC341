@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <boost/algorithm/string.hpp>
-#include <boost/range/algorithm/remove_if.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
 /**************************************************************
@@ -49,6 +48,7 @@ public:
      */
     static std::string Strip(std::string inString){
         //remove - at beginning and end of words
+        inString = Util::Lower(inString);
         while(inString.size() != 0 && inString.find('-', 0) == 0){
             inString.erase(0, 1);
         }
@@ -62,8 +62,17 @@ public:
         while(inString.size() != 0 && inString.find('\'', inString.size()-1) == inString.size()-1){
             inString.erase(inString.size()-1, 1);
         }
-        inString.erase(boost::remove_if(inString,
-                                        boost::is_any_of(GENERIC_FILTER_LIST)), inString.end());
+        for(int i = 0; i < inString.size(); i++){
+            int asciiNumber = inString[i];
+            //if non lower case alpha
+            if(asciiNumber < 97 || asciiNumber > 122){
+                //and not - or '
+                if(asciiNumber != 45 && asciiNumber != 39){
+                    //erase it.
+                    inString.erase(i, 1);
+                }
+            }
+        }
         return inString;
     }
 
