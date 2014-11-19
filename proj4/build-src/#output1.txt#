@@ -1,0 +1,13 @@
+                  Quadratic Probing Analysis (Table size = 9)
+                --- Inserts ---   ------- Probes -------    ----- Clusters ------
+    N   lambda  success  failed     total    avg    max     number   avg     max 
+    0    0        1            0            1         0       0         1               1        1
+    1    0        2            0            2         0       0         2               1        1
+    2    0        3            0            3         0       0         1               3        3
+    3    0        4            0            4         0       0         2               2        3
+    4    0        5            0            5         0       0         3               1        3
+    5    0        6            0            6         0       0         3               2        3
+    6    0        6            1            10         0       0         3               2        3
+    7    0        7            1            12         0       0         2               3        4
+    8    0        7            2            16         0       0         2               3        4
+    9    0        7            3            20         0       0         2               3        4

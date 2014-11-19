@@ -1,24 +1,11 @@
-﻿/**************************************************************
- * File:    QuadraticProbing.cpp
- * Project: CMSC 341 - Project 4 - Hash Table
- * Author : Eliot Carney-Seim
- * Date   : November 18th, 2014
- * Section: Lecture-03
- * E-mail:  eliot2@.umbc.edu
- *
- * Class holding hash table that gets accessed with a Quadratic proving method.
- *
- *************************************************************/
-
-#ifndef QUADRATIC_PROBING_H
-#define QUADRATIC_PROBING_H
+﻿#ifndef LINEAR_PROBING_H
+#define LINEAR_PROBING_H
 
 #include <vector>
 #include <string>
 #include "Utils.h"
 #include <set>
-#if 0
-#endif
+
 
 // QuadraticProbing Hash table class
 //
@@ -29,13 +16,14 @@
 // bool remove( x )       --> Remove x
 // bool contains( x )     --> Return true if x is present
 // void makeEmpty( )      --> Remove all items
+
 using namespace std;
 template <typename HashedObj>
-class QuadraticHashTable
+class LinearHashTable
 {
   public:
 
-    QuadraticHashTable( int size) {
+    LinearHashTable( int size) {
 		array.resize(size);
 		makeEmpty( );
 		totalProbes = 0;
@@ -45,22 +33,15 @@ class QuadraticHashTable
 		maxProbesInAnInsert= 0;
 	}
 
-    /* Retrieves element of generic type at location given.
-	*/
     HashedObj getElementAt(int x){
-	    HashEntry t = array[x];
-		return t.element;
+		return array[x].element;
     }
 
-    /*Tests for generic type containment, there can be only one.
-	*/
     bool contains( const HashedObj & x ) const
     {
 	   return isActive( hashFunction( x ) );
     }
 
-    /*Lazy Deletion
-	*/
     void makeEmpty( )
     {
 	   currentSize = 0;
@@ -68,9 +49,6 @@ class QuadraticHashTable
 		  array[ i ].info = EMPTY;
     }
 
-
-    /*Inserts generic type via hash algorithm found in findPos
-	*/
     bool insert( const HashedObj & x )
     {
 	    totalInsertionAttempts++;
@@ -91,8 +69,6 @@ class QuadraticHashTable
 	   return true;
     }
 
-    /* Max number of clusters
-	*/
     int getTotalClusters(){
 	    int totalClusters = 0;
 	    bool inCluster = false;
@@ -107,16 +83,12 @@ class QuadraticHashTable
 	    return totalClusters;
     }
 
-    /* Average number of clusters.
-	*/
     float getAverageClusterSize(){
 		//is average cluster size == total cluster sizes / # clusters?
 	    // and isn't total cluster size = # of active hashes?
 	    return (float)currentSize / (float)getTotalClusters();
     }
 
-    /* Largest cluster in array
-	*/
     int getSizeOfBiggestCluster(){
 	    int biggestClusterSize = 0;
 	    int potentialBiggest = 0;
@@ -150,20 +122,14 @@ class QuadraticHashTable
 
     }
 
-    /* Average probes required per insertion
-	*/
     float getAverageProbesPerInsertion(){
 		return (float)totalProbes/(float)totalInsertionAttempts;
     }
 
-    /* Total Probes forever
-	*/
     int getTotalProbes(){
 	    return totalProbes;
     }
 
-    /*Marks files removed using lazy deletion
-	*/
     bool remove( const HashedObj & x )
     {
 	   int currentPos = hashFunction( x );
@@ -177,8 +143,6 @@ class QuadraticHashTable
 
     enum EntryType { ACTIVE, EMPTY, DELETED };
 
-    /*Max probes found in one insert
-	*/
     int getMaxProbesInAnInsert(){
 	    return maxProbesInAnInsert;
     }
@@ -202,48 +166,45 @@ private:
     
     vector<HashEntry> array;
 
-    /*If target node is active, or IN array
-	*/
+
     bool isActive( int currentPos ) const
 	 { return array[ currentPos ].info == ACTIVE; }
 
-    /*the findPos, finding position within while loop, in LogN
-	*/
     int hashFunction( const HashedObj & x ){
 	   int oldProbeTotal = totalProbes;
 	   int offset = 1;
-	   int key = myhash( x );
-	   int origKey = key;
+	   int currentPos = myhash( x );
+	   int origPos = currentPos;
 	   //need to test to make sure the same location isn't probed twice.
 	   set<int> testedPositions;
 	   totalProbes++;
 	   //while probing location is NOT empty and w e haven't tested this location before...
-	   while( array[ key ].info != EMPTY && testedPositions.count(key) == 0){
-			//NON-QUADRATIC related code below
+	   while( array[ currentPos ].info != EMPTY && testedPositions.count(currentPos) == 0){
+			//NON-LINEAR related code below
 			totalProbes++;
 			printDebug("Pre-While", 3);
 			//To keep track of if we've probed this location before.
-			testedPositions.insert(key);
-			key = origKey;
+			testedPositions.insert(currentPos);
+			//we have to reset the position so we can move from it.
+			currentPos = origPos;
 			//Definitiion of Quadratic Right here.
-			key += offset*offset;  // Compute ith probe
+			currentPos += offset;  // Compute ith probe
 			offset++;
 			//Debugging necessary for testing proper position testing.
-			printDebug("currentPos:  " + numToString(key) + ", offset: " +
+			printDebug("currentPos:  " + numToString(currentPos) + ", offset: " +
 					 numToString(offset), 1);
-			key = key % array.capacity();
-			printDebug("Post-While @ " + numToString(key) , 1);
+			currentPos = currentPos % array.capacity();
+			printDebug("Post-While @ " + numToString(currentPos) , 1);
 	   }
 	   int maxProbesThisInsert = totalProbes - oldProbeTotal;
 	   if(maxProbesThisInsert > maxProbesInAnInsert){
 		   maxProbesInAnInsert = maxProbesThisInsert;
 	   }
 	   printDebug("Out-While", 3);
-	   return key;
+	   return currentPos;
     }
 
-    /*Simple int hasher, nothing special
-	*/
+
     int myhash( const HashedObj & x ) const{
 	   int hashVal = hash( x );
 	   hashVal = hashVal % array.capacity();

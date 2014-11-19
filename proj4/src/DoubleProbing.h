@@ -1,24 +1,13 @@
-﻿/**************************************************************
- * File:    QuadraticProbing.cpp
- * Project: CMSC 341 - Project 4 - Hash Table
- * Author : Eliot Carney-Seim
- * Date   : November 18th, 2014
- * Section: Lecture-03
- * E-mail:  eliot2@.umbc.edu
- *
- * Class holding hash table that gets accessed with a Quadratic proving method.
- *
- *************************************************************/
+﻿
 
-#ifndef QUADRATIC_PROBING_H
-#define QUADRATIC_PROBING_H
+#ifndef DOUBLE_PROBING_H
+#define DOUBLE_PROBING_H
 
 #include <vector>
 #include <string>
 #include "Utils.h"
 #include <set>
-#if 0
-#endif
+
 
 // QuadraticProbing Hash table class
 //
@@ -29,13 +18,14 @@
 // bool remove( x )       --> Remove x
 // bool contains( x )     --> Return true if x is present
 // void makeEmpty( )      --> Remove all items
+
 using namespace std;
 template <typename HashedObj>
-class QuadraticHashTable
+class DoubleHashTable
 {
   public:
 
-    QuadraticHashTable( int size) {
+    DoubleHashTable( int size, int R) {
 		array.resize(size);
 		makeEmpty( );
 		totalProbes = 0;
@@ -43,13 +33,14 @@ class QuadraticHashTable
 		totalInsertionAttempts= 0;
 		averageClusterSize= 0;
 		maxProbesInAnInsert= 0;
-	}
+		this->R =R;
+		M = size;
 
+	}
     /* Retrieves element of generic type at location given.
 	*/
     HashedObj getElementAt(int x){
-	    HashEntry t = array[x];
-		return t.element;
+		return array[x].element;
     }
 
     /*Tests for generic type containment, there can be only one.
@@ -67,7 +58,6 @@ class QuadraticHashTable
 	   for( int i = 0; i < array.capacity( ); i++ )
 		  array[ i ].info = EMPTY;
     }
-
 
     /*Inserts generic type via hash algorithm found in findPos
 	*/
@@ -149,7 +139,6 @@ class QuadraticHashTable
 		return biggestClusterSize;
 
     }
-
     /* Average probes required per insertion
 	*/
     float getAverageProbesPerInsertion(){
@@ -190,6 +179,8 @@ private:
     int totalInsertionAttempts;
     int averageClusterSize;
     int maxProbesInAnInsert;
+    int R; //Prime under M
+    int M; //Size of Array
 
     struct HashEntry
     {
@@ -202,6 +193,7 @@ private:
     
     vector<HashEntry> array;
 
+
     /*If target node is active, or IN array
 	*/
     bool isActive( int currentPos ) const
@@ -211,7 +203,7 @@ private:
 	*/
     int hashFunction( const HashedObj & x ){
 	   int oldProbeTotal = totalProbes;
-	   int offset = 1;
+	   int i = 1;
 	   int key = myhash( x );
 	   int origKey = key;
 	   //need to test to make sure the same location isn't probed twice.
@@ -219,20 +211,22 @@ private:
 	   totalProbes++;
 	   //while probing location is NOT empty and w e haven't tested this location before...
 	   while( array[ key ].info != EMPTY && testedPositions.count(key) == 0){
-			//NON-QUADRATIC related code below
+			//NON-LINEAR related code below
 			totalProbes++;
-			printDebug("Pre-While", 3);
+			printDebug("Pre-While", 1);
 			//To keep track of if we've probed this location before.
 			testedPositions.insert(key);
-			key = origKey;
-			//Definitiion of Quadratic Right here.
-			key += offset*offset;  // Compute ith probe
-			offset++;
+			//Definitiion of Double Hash Right here.
+			key = (key%M + (i * (R - (key % R)))) % M;  // Compute ith probe
+			i++;
 			//Debugging necessary for testing proper position testing.
 			printDebug("currentPos:  " + numToString(key) + ", offset: " +
-					 numToString(offset), 1);
-			key = key % array.capacity();
+					 numToString(i), 1);
 			printDebug("Post-While @ " + numToString(key) , 1);
+	   }
+
+	   if(testedPositions.count(key) != 0){
+		   printDebug("INPUT OF THIS FAILED", 1);
 	   }
 	   int maxProbesThisInsert = totalProbes - oldProbeTotal;
 	   if(maxProbesThisInsert > maxProbesInAnInsert){
@@ -246,7 +240,7 @@ private:
 	*/
     int myhash( const HashedObj & x ) const{
 	   int hashVal = hash( x );
-	   hashVal = hashVal % array.capacity();
+	   hashVal = hashVal % M;
 	   if( hashVal < 0 ){
 		  hashVal += array.capacity( );
 		}

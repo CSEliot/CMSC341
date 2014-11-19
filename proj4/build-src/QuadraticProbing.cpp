@@ -1,7 +1,6 @@
-//#include "SeparateChaining.h"
+//#include "QuadraticProbing.h"
 //#include <iostream>
 //using namespace std;
-
 
 ///**
 // * Internal method to test if a positive number is prime.
@@ -28,6 +27,9 @@
 // */
 //int nextPrime( int n )
 //{
+//    if( n <= 0 )
+//        n == 3;
+
 //    if( n % 2 == 0 )
 //        n++;
 

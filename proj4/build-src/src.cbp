@@ -90,17 +90,29 @@
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/CMakeLists.txt">
       </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/DoubleProbing.h">
+      </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/LinearProbing.h">
+      </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/QuadraticProbing.h">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/Random.h">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/SeparateChaining.h">
       </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/Utils.h">
+      </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/dsexceptions.h">
+      </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/exceptions.h">
+      </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/input1.txt">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/input3.txt">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/proj4sampleoutput.txt">
+      </Unit>
+      <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/proj4sampletables.txt">
       </Unit>
       <Unit filename="/home/eliot2/School/CMSC/341/proj4/src/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />

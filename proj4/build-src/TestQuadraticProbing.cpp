@@ -1,5 +1,5 @@
 //#include <iostream>
-//#include "SeparateChaining.h"
+//#include "QuadraticProbing.h"
 //using namespace std;
 
 //    // Simple main
@@ -18,7 +18,7 @@
 //    for( i = 1; i < NUMS; i += 2 )
 //        H.remove( i );
 
-//    for( i = 2; i < NUMS; i += 2 )
+//    for( i = 2; i < NUMS; i +=2 )
 //        if( !H.contains( i ) )
 //            cout << "Contains fails " << i << endl;
 
