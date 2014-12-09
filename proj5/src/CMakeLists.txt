@@ -1,0 +1,6 @@
+project(src)
+cmake_minimum_required( VERSION 2.6)
+aux_source_directory(. SRC_LIST)
+file(GLOB SRC . *.cpp *.h *.txt)
+add_executable  (Driver.out ${SRC})
+SET(CMAKE_CXX_FLAGS_DISTRIBUTION  "-O3, -std=gnu++98")
