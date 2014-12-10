@@ -2,12 +2,12 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 int main(int argc, char *argv[])
 {
 	string filename = argv[1];
-
 	//read the command line argument and generate a graph
 	Graph mygraph(filename);
 	int s, d, t;

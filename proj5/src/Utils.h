@@ -31,7 +31,7 @@ string numToString(T num){
 }
 
 const bool DEBUG = true;
-const int D_LEVEL = 5;
+const int D_LEVEL = 50;
 /* A testing program for debugging output.
  *Pre: Level of severity, lower number = more sever
  *		 message is thing to print

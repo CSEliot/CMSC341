@@ -13,6 +13,8 @@ class Graph
 		int edges;
 		int vertexes;
 		std::vector< std::vector<int> > graph;
+		int recurseTrips(std::vector< std::vector<int> > masterList, int current, int target, int min);
+
 };
 
 #endif // GRAPH_H
