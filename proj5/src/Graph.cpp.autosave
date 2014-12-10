@@ -108,6 +108,8 @@ int tripsRecurse(int current, int target, vector<int> edgesSeen, vector<int> ver
 			return -1;
 		}
 	}
+	//or if it points to a location we've been to before, return -1
+	for
 	// if it's NOT, recurse, giving position of the highest edge as current
 	// and adding ALL edges of current to edgesSeen;
 	//if it returns with negative one, try second highest edge,

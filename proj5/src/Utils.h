@@ -13,10 +13,12 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <istream>
+#include <algorithm>
 using namespace std;
 
 
@@ -29,7 +31,7 @@ string numToString(T num){
 }
 
 const bool DEBUG = true;
-const int D_LEVEL = 2;
+const int D_LEVEL = 5;
 /* A testing program for debugging output.
  *Pre: Level of severity, lower number = more sever
  *		 message is thing to print
@@ -79,8 +81,8 @@ int nextPrime( int n )
 }
 
 /**
- * A hash routine for string objects.
- */
+* A hash routine for string objects.
+*/
 int hash( const string & key )
 {
     int hashVal = 0;
@@ -94,8 +96,7 @@ int hash( const string & key )
 /**
  * A hash routine for ints.
  */
-int hash( int key )
-{
+int hash( int key ){
     return key;
 }
 
@@ -117,4 +118,26 @@ static T num( const string &Text ){
 	return ss >> result ? result : 0;
 }
 
+/*replaces string in string with string
+ */
+static string replace(string s, string toReplace, string replaceWith){
+	if(s.length() <= toReplace.length()){
+		printDebug("lengths are: " +str<int>(s.length())+" "+str<int>(toReplace.length()), 2);
+		return s;
+	}else{
+    return(s.replace(s.find(toReplace), toReplace.length(), replaceWith));}
+}
+
+/* returns a string split by whitespace into a vector
+ */
+static vector<string> split(string s){
+	// construct a stream from the string
+	stringstream str(s);
+
+	// use stream iterators to copy the stream to the vector as whitespace separated strings
+	istream_iterator<string> it(str);
+	istream_iterator<string> end;
+	vector<string> results(it, end);
+	return results;
+}
 #endif // UTILS_H

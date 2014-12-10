@@ -13,6 +13,20 @@ iostream
 -
 fstream
 -
+istream
+-
+iostream
+-
+iterator
+-
+ostream
+-
+sstream
+-
+vector
+-
+algorithm
+-
 string
 -
 ctime
@@ -29,13 +43,23 @@ Utils.h
 /home/eliot2/School/CMSC/341/proj5/src/Graph.h
 string
 -
+iostream
+-
+vector
+-
 
 /home/eliot2/School/CMSC/341/proj5/src/Utils.h
+vector
+-
 iostream
 -
 fstream
 -
 sstream
+-
+istream
+-
+algorithm
 -
 
 /home/eliot2/School/CMSC/341/proj5/src/exceptions.h

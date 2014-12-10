@@ -39,6 +39,7 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
+
     try {
         // Instatiate the main object
         HashedSplays wordFrequecy(26);
