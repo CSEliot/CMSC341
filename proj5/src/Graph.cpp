@@ -136,8 +136,9 @@ int Graph::trips(int start, int stop, int people){
 		}
 	}
 	int minTrips = -1;
+	vector<int> visited;
 	while(minTrips == -1){
-		minTrips = recurseTrips(masterList, start, stop, minTrips);
+		minTrips = recurseTrips(masterList, start, stop, minTrips, visited);
 		if(minTrips == -1){
 			biggest = 0;
 			for(int x = 0; x < graph.size(); x++ ){
@@ -159,7 +160,7 @@ int Graph::trips(int start, int stop, int people){
 
 			masterList[i] = tempVector;
 			i++;
-			printDebug("minTrips failed, increased master size: ");
+			printDebug("minTrips failed, increased master size: ", 0);
 
 			if(DEBUG){
 				printDebug("Master List: ", 5);
@@ -179,10 +180,51 @@ int Graph::trips(int start, int stop, int people){
 	//does current have any adjacencies in master list?
 	//if so, how many?
 		//for each adjacency set min to go through that many times and
-	return 5;
+	printDebug("mIntrips: " + str<int>(minTrips), 0);
+	return minTrips;
 }
 
-Graph::recurseTrips(std::vector<vector<int> > masterList, int current, int target, int min){
+int Graph::recurseTrips(std::vector<vector<int> > masterList, int current, int target, int min, vector<int> visited){
+	//find adjacencies given current
+
+	vector< int> adjacencies(edges);
+	vector <int> mins(edges);
+	std::vector<int>::iterator iter;
+	iter = visited.begin();
+	iter = visited.insert ( iter , current);
+	if(current == target){
+		return min;
+	}
+	int i = 0;
+	for (int x = 0; x < masterList.size(); x++){
+		if(masterList[x][1] == current){
+			if(find(visited.begin(), visited.end(), masterList[x][1]) != visited.end()) {
+			    //do nothing
+			} else {
+				adjacencies[i] = masterList[x][2];
+				mins[i] = masterList[x][0];
+				i++;
+			}
+		}
+		if(masterList[x][2] == current){
+			if(find(visited.begin(), visited.end(), masterList[x][2]) != visited.end()) {
+			    //do nothing
+			} else {
+				adjacencies[i] = masterList[x][1];
+				mins[i] = masterList[x][0];
+				i++;
+			}
+		}
+	}
+	for(int x = 0; x < adjacencies.size(); x++){
+		min = recurseTrips(masterList, adjacencies[x], target, mins[x], visited);
+		if(min == -1){
+			return -1;
+		}
+		else{
+			return min;
+		}
+	}
 	return -1;
 }
 
